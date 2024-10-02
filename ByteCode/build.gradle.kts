@@ -23,7 +23,7 @@ tasks.register<Exec>("CompileGen") {
     commandLine(
       "${System.getenv("JAVA_HOME")}/bin/javac",
       "-d",
-      generatorDir.absolutePath,
+      generatorDir.absolutePath+"1",
       "$javaDir/Gen.java"
     )
     standardOutput = System.out
@@ -34,11 +34,29 @@ tasks.register<Exec>("CompileGen") {
   }
 }
 
-var runGeneratorTasks = ""
+tasks.register<Exec>("CompileGen2") {
+  dependsOn("CompileGen")
+  doFirst {
+    println("Compiling Generator class")
+    commandLine(
+      "${System.getenv("JAVA_HOME")}/bin/javac",
+      "-d",
+      "${generatorDir.absolutePath}2",
+      "$javaDir/GenJavadocComment.java"
+    )
+    standardOutput = System.out
+    errorOutput = System.err
+  }
+  doLast {
+    println("Compile success")
+  }
+}
+
+var runGeneratorBaseTasks = ""
 sourcesDir.listFiles()?.forEachIndexed { index, file ->
-  val taskName = "runGenerator"
+  val taskName = "runGeneratorBase"
   tasks.register("$taskName$index", JavaExec::class.java) {
-    classpath = files(generatorDir)
+    classpath = files(file("${generatorDir.absolutePath}1"))
     mainClass.set("id.pras.jvmlang.bytecode.Gen")
     args = listOf(
       "-i",
@@ -54,14 +72,35 @@ sourcesDir.listFiles()?.forEachIndexed { index, file ->
         else -> ""
       }
     )
-    if (index == 0) dependsOn("CompileGen") else dependsOn("$taskName${index-1}")
+    if (index == 0) dependsOn("CompileGen2") else dependsOn("$taskName${index-1}")
   }
-  runGeneratorTasks = "$taskName$index"
+  runGeneratorBaseTasks = "$taskName$index"
+}
+
+var runGeneratorJavadocTasks="";
+sourcesDir.listFiles()?.forEachIndexed { index, file ->
+  val taskName = "runGeneratorJavadocTask"
+  tasks.register("$taskName$index", JavaExec::class.java) {
+    classpath = files(file("${generatorDir.absolutePath}2"))
+    mainClass.set("id.pras.jvmlang.bytecode.GenJavadocComment")
+    args = listOf(
+      "-i",
+      "$projectDir/src/main/java/id/pras/jvmlang/bytecode/${file.nameWithoutExtension}.java",
+      "-o",
+      "$projectDir/src/main/java/id/pras/jvmlang/bytecode/${file.nameWithoutExtension}.java"
+    )
+    if (index == 0) dependsOn(runGeneratorBaseTasks) else dependsOn("$taskName${index-1}")
+  }
+  runGeneratorJavadocTasks = "$taskName$index"
 }
 
 tasks.register("GenJavaFiles"){
-  dependsOn(runGeneratorTasks)
+  dependsOn(runGeneratorJavadocTasks)
   doLast{
     println("generated successfully")
   }
+}
+
+tasks.named<JavaCompile>("compileJava"){
+ exclude("**/Gen.java","**/GenJavadocComment.java")
 }
