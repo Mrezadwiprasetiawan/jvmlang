@@ -12,9 +12,12 @@ val sourcesDir = file("$currentDir/sources")
 val javaDir = file("$currentDir/src/main/java/id/pras/jvmlang/bytecode")
 val generatorDir = file("$projectDir/build/generator")
 
-tasks.register<Copy>("prepareGeneratorDir") {
-  from(generatorDir)
-  into(generatorDir)
+tasks.register<Copy>("javadocCopy") {
+  dependsOn("javadoc")
+  println("from $buildDir/docs/javadoc")
+  from("$buildDir/docs/javadoc")
+  into("./javadocs")
+  println("to ./javadocs")
 }
 
 tasks.register<Exec>("CompileGen") {
@@ -117,6 +120,8 @@ tasks.named<Delete>("clean"){
       println("filename $file")
     }
     delete(workfiles)
+    println("delete javadocs directory")
+    delete("javadocs")
   }
   doLast{
     println("successfully")
