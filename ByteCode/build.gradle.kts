@@ -50,7 +50,7 @@ sourcesDir.listFiles()?.forEachIndexed { index, file ->
     )
     if(index==0) dependsOn("CompileGen") else dependsOn("$taskName${index-1}")
   }
-  runGeneratorTasks=taskName
+  runGeneratorTasks="$taskName$index"
 }
 
 tasks.register("GenJavaFiles"){
