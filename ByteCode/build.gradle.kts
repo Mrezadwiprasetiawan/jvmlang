@@ -104,3 +104,21 @@ tasks.register("GenJavaFiles"){
 tasks.named<JavaCompile>("compileJava"){
  exclude("**/Gen.java","**/GenJavadocComment.java")
 }
+
+tasks.named<Delete>("clean"){
+  doFirst{
+    println("start to cleaning generated java files")
+    val workfiles=fileTree(javaDir){
+      include("**/*.java")
+      exclude("**/Gen.java")
+      exclude("**/GenJavadocComment.java")
+    }
+    workfiles.forEach{ file->
+      println("filename $file")
+    }
+    delete(workfiles)
+  }
+  doLast{
+    println("successfully")
+  }
+}

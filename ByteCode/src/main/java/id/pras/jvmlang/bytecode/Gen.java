@@ -152,7 +152,7 @@ public final class Gen {
         "/**\n * Kelas {@code "
             + className
             + "} dihasilkan oleh kelas id.pras.jvmlang.bytecode.Gen\n"
-            + " * yang dieksekusi dari gradle task GenJavaFiles\n");
+            + " * yang dieksekusi dari gradle task GenJavaFiles\n */\n");
     writer.write("// digenerasi pada " + getTimeString() + " GMT+7\n");
 
     // start generating
