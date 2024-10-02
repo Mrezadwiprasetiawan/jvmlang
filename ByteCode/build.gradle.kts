@@ -46,18 +46,21 @@ sourcesDir.listFiles()?.forEachIndexed { index, file ->
       "-o",
       "$projectDir/src/main/java/id/pras/jvmlang/bytecode/${file.nameWithoutExtension}.java",
       "-p",
-      "id.pras.jvmlang.bytecode"
+      "id.pras.jvmlang.bytecode",
+      when (file.nameWithoutExtension) {
+        "ConstantPool" -> "-cp"
+        "Header" -> "-H"
+        "AccessFlags" -> "-af"
+        else -> ""
+      }
     )
-    if(index==0) dependsOn("CompileGen") else dependsOn("$taskName${index-1}")
+    if (index == 0) dependsOn("CompileGen") else dependsOn("$taskName${index-1}")
   }
-  runGeneratorTasks="$taskName$index"
+  runGeneratorTasks = "$taskName$index"
 }
 
 tasks.register("GenJavaFiles"){
   dependsOn(runGeneratorTasks)
-  doFirst{
-    println("starting Generator")
-  }
   doLast{
     println("generated successfully")
   }

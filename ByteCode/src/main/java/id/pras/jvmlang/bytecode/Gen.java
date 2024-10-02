@@ -24,6 +24,8 @@ public final class Gen {
     ArrayList<Integer[]> fieldsSizes = null;
     ArrayList<String[]> fieldsNames = null;
     boolean isConstantPool = false;
+    boolean isHeader = false;
+    boolean isAccessFlags = false;
     String packageName = "";
 
     if (args.length == 0) {
@@ -73,9 +75,9 @@ public final class Gen {
         }
       }
 
-      if (isConstantPool(arg)) {
-        isConstantPool = true;
-      }
+      if (isHeader(arg)) isHeader = true;
+      if (isConstantPool(arg)) isConstantPool = true;
+      if (isAccessFlags(arg)) isAccessFlags=true;
       if (i == args.length - 1) cp();
     }
     // if constant pool then init fields
@@ -136,9 +138,8 @@ public final class Gen {
     String className = output.substring(output.lastIndexOf("/") + 1, output.length() - 5);
     writer.write("public final class " + className + " {\n");
 
-    writer.write(
-        "  // for opCode this is the Size for instruction but for constant pool this is the size of the\n  //constant pool tag\n");
-    writer.write("  public static final int SIZE = 1;\n");
+    if (!isHeader&&!isAccessFlags) writer.write("  public static final int SIZE = 1;\n");
+    else writer.write("  public static final int SIZE = 4;\n");
 
     // loop for each input file line to generate corresponding output
     for (int i = 0; i < vars.size(); i++) {
@@ -203,9 +204,9 @@ public final class Gen {
     cp();
 
     // generate Object
-    if (!isConstantPool) {
+    if (!isConstantPool && !isHeader) {
       for (int i = 0; i < genVars.size(); i++) {
-        String var = Character.toUpperCase(vars.get(i).charAt(0)) + vars.get(i).substring(1);
+        String var = Character.toUpperCase(vars.get(i).charAt(0)) + vars.get(i).substring(1).toLowerCase();
         writer.write(
             "  public static final "
                 + className
@@ -219,7 +220,7 @@ public final class Gen {
                 + genVars.get(i)
                 + ");\n");
       }
-    } else {
+    } else if (isConstantPool) {
       for (int i = 0; i < genVars.size(); i++) {
         String var = Character.toUpperCase(vars.get(i).charAt(0)) + vars.get(i).substring(1);
         String resIntArr = "new int[]{";
@@ -244,14 +245,34 @@ public final class Gen {
                 + "}"
                 + ");\n");
       }
+    } else if (isHeader) {
+      for (int i = 2; i < vars.size()-2; i += 2) {
+        String var = Character.toUpperCase(vars.get(i).charAt(0)) + vars.get(i).substring(1);
+        writer.write(
+            "  public static final "
+                + className
+                + " Java"
+                + var.substring(var.indexOf("_"))
+                + " = new "
+                + className
+                + "("
+                + genVals.get(i)
+                + ", "
+                + genVars.get(i)
+                + ","
+                + genVals.get(i + 1)
+                + ", "
+                + genVars.get(i + 1)
+                + ");\n");
+      }
     }
 
-    // generate encapsulation vars
-    writer.write("  private String name;\n");
-    // generate constructor
-    // private because this class is a singleton
-    if (!isConstantPool) {
+    // generate encapsulation vars and constructor
+    if (!isConstantPool && !isHeader) {
+      writer.write("  private String name;\n");
       writer.write("  private int code;\n");
+
+      // private because this class is a singleton
       writer.write(
           "\n  private "
               + className
@@ -259,7 +280,7 @@ public final class Gen {
       // getter and setter
       writer.write(genGet("String", "name", 2));
       writer.write(genGet("int", "code", 2));
-    } else {
+    } else if (isConstantPool) {
       writer.write("  private int tag;\n");
       writer.write("  private int[] fieldSizes;\n");
       writer.write("  private String[] fields;\n");
@@ -272,6 +293,21 @@ public final class Gen {
       writer.write(genGet("int", "tag", 2));
       writer.write(genGet("int[]", "fieldSizes", 2));
       writer.write(genGet("String[]", "fields", 2));
+    } else if (isHeader) {
+      writer.write("  private String minor_version_name;\n");
+      writer.write("  private String major_version_name;\n");
+      writer.write("  private int minor_version;\n");
+      writer.write("  private int major_version;\n");
+      writer.write(
+          "\n  private "
+              + className
+              + "(String minor_version_name, int minor_version, String major_version_name, int major_version)");
+      writer.write(
+          "{  this.minor_version_name = minor_version_name;\n  this.minor_version=minor_version;\n  this.major_version_name=major_version_name;\n  this.major_version=major_version;\n  }\n");
+      writer.write(genGet("String","minor_version_name",2));
+      writer.write(genGet("int","minor_version",2));
+      writer.write(genGet("String","major_version_name",2));
+      writer.write(genGet("int","major_version",2));
     }
     writer.write("\n  private " + className + "(){}\n");
 
@@ -306,6 +342,14 @@ public final class Gen {
     return s.equals("--package") || s.equals("-p");
   }
 
+  private static boolean isHeader(String s) {
+    return s.equals("-H") || s.equals("-header");
+  }
+  
+  private static boolean isAccessFlags(String s){
+    return s.equals("-af")|| s.equals("--access-flags");
+  }
+
   private static void printHelp() {
     System.out.println("Generator public static final int value for java");
     System.out.println("-i or --input <input path> tell where the input file");
@@ -313,6 +357,9 @@ public final class Gen {
     System.out.println(
         "-cp or --constant-pool to make Generator generate constant pool instead of some pairing variable");
     System.out.println("-p or --package <package-name> what is your package name?");
+    System.out.println(
+        "-H or --header to make Generator  generate Header instead of some pairing variable");
+    System.out.println("-af or --access-flags to make Generator  generate Access Flags instead of some pairing variable");
   }
 
   // load cursor pos -> save -> print
@@ -340,7 +387,7 @@ public final class Gen {
     String cap = sb.toString();
 
     // Membuat string indentasi
-    String indentStr = " ".repeat(indent); // Menggunakan Java 11 untuk membuat indentasi
+    String indentStr = " ".repeat(indent);
 
     // Menambahkan kode getter
     result
