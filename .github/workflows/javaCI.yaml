@@ -25,13 +25,13 @@ jobs:
       run: chmod +x gradlew
 
     - name: Generate Java files
-      run: ./gradlew GenJavaFiles
+      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan GenJavaFiles
       
     - name: Generate javadoc
-      run: ./gradlew javadoc
+      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan javadoc
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan build
 
     - name: Commit and push changes
       run: |
