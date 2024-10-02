@@ -19,14 +19,14 @@
       "file": "/storage/emulated/0/AndroidIDEProjects/jvmlang/.github/workflows/javaCI.yaml",
       "selection": {
         "end": {
-          "column": 26,
-          "index": 535,
-          "line": 30
+          "column": 21,
+          "index": 89,
+          "line": 6
         },
         "start": {
-          "column": 26,
-          "index": 535,
-          "line": 30
+          "column": 21,
+          "index": 89,
+          "line": 6
         }
       }
     },
@@ -61,5 +61,5 @@
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/jvmlang/ByteCode/.gitignore"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/jvmlang/.github/workflows/javaCI.yaml"
 }
