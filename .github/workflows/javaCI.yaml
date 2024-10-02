@@ -27,7 +27,7 @@ jobs:
     - name: Generate Java files
       run: ./gradlew GenJavaFiles
       
-    - name :Generate javadoc
+    - name: Generate javadoc
       run: ./gradlew javadoc
 
     - name: Build with Gradle
