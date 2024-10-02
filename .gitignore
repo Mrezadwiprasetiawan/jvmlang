@@ -1,4 +1,7 @@
 # Built application files
+.gitignore
+.androidide
+
 *.apk
 *.aar
 *.ap_
