@@ -1,0 +1,35 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/jvmlang/ByteCode/build.gradle.kts",
+      "selection": {
+        "end": {
+          "column": 31,
+          "index": 1397,
+          "line": 55
+        },
+        "start": {
+          "column": 31,
+          "index": 1397,
+          "line": 55
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/jvmlang/.github/workflows/javaCI.yaml",
+      "selection": {
+        "end": {
+          "column": 26,
+          "index": 535,
+          "line": 30
+        },
+        "start": {
+          "column": 26,
+          "index": 535,
+          "line": 30
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/jvmlang/.github/workflows/javaCI.yaml"
+}

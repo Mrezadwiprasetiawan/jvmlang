@@ -1,0 +1,16 @@
+CONSTANT_Class 07 u2 name_index
+CONSTANT_Fieldref 09 u2 class_index u2 name_and_type_index
+CONSTANT_Methodref 0A u2 class_index u2 name_and_type_index
+CONSTANT_InterfaceMethodref 0B u2 class_index u2 name_and_type_index
+CONSTANT_String 08 u2 string_index
+CONSTANT_Integer 03 u4 bytes
+CONSTANT_Float 04 u4 bytes
+CONSTANT_Long 05 u4 high_bytes u4 low_bytes
+CONSTANT_Double 06 u4 high_bytes u4 low_bytes
+CONSTANT_NameAndType 0C u2 name_index u2 descriptor_index
+CONSTANT_Utf8 01 u2 length u1 bytes[length]
+CONSTANT_MethodHandle 0F u1 reference_kind u2 reference_index
+CONSTANT_MethodType 10 u2 descriptor_index
+CONSTANT_InvokeDynamic 12 u2 bootstrap_method_attr_index u2 name_and_type_index
+CONSTANT_Module 13 u2 name_index
+CONSTANT_Package 14 u2 name_index
