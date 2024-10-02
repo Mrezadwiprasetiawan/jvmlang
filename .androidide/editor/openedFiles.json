@@ -29,7 +29,37 @@
           "line": 30
         }
       }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/jvmlang/.gitignore",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/jvmlang/ByteCode/.gitignore",
+      "selection": {
+        "end": {
+          "column": 6,
+          "index": 6,
+          "line": 0
+        },
+        "start": {
+          "column": 6,
+          "index": 6,
+          "line": 0
+        }
+      }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/jvmlang/.github/workflows/javaCI.yaml"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/jvmlang/ByteCode/.gitignore"
 }
