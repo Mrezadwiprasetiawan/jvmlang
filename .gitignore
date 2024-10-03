@@ -1,6 +1,6 @@
 # Built application files
 .gitignore
-.androidide/
+/.androidide
 
 *.apk
 *.aar

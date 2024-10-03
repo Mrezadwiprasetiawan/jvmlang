@@ -1,4 +1,4 @@
-name: ByteCode CI
+name: ByteCodeJava CI
 
 on:
   push:
@@ -25,16 +25,16 @@ jobs:
       run: chmod +x gradlew
 
     - name: Generate Java files
-      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCode:GenJavaFiles
+      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCodeJava:GenJavaFiles
       
     - name: Generate javadoc
-      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCode:javadoc
+      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCodeJava:javadoc
       
     - name: copy javadoc directory
-      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCode:javadocCopy
+      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCodeJava:javadocCopy
 
     - name: Build with Gradle
-      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCode:build
+      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCodeJava:build
 
     - name: Commit and push changes
       run: |
@@ -47,4 +47,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: cleaning internal resources
-      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCode:clean
+      run: ./gradlew --debug --info -stacktrace --warning-mode all --build-cache --scan :ByteCodeJava:clean

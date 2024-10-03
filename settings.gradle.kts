@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "jvmlang"
 
-include(":ByteCode")
+include(":ByteCodeJava",":ByteCodeC")
