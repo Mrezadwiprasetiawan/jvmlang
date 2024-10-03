@@ -84,17 +84,6 @@ tasks.named<JavaCompile>("compileJava") {
   exclude("**/Gen.java", "**/GenJavadocComment.java")
 }
 
-tasks.named<Delete>("clean") {
-  doFirst {
-    val workfiles = fileTree(javaDir) {
-      include("**/*.java")
-      exclude("**/Gen.java", "**/GenJavadocComment.java")
-    }
-    delete(workfiles)
-    delete("javadocs")
-  }
-}
-
 // ------------------------------------
 // PUBLISHING TO GITHUB CONFIGURATION
 // ------------------------------------
