@@ -10,4 +10,9 @@ public final class Class {
   private short interface_count;
   private short methodcount;
   private ArrayList<OpCode[]>opcode;
+  
+  //unimplemented yet
+  public Class(){
+    
+  }
 }
