@@ -1,11 +1,11 @@
-//digenerasi ulang oleh id.pras.jvmlang.GenJavadocComment pada Time: 15:42:15, Date: 03/10/2024 GMT +7
+//digenerasi ulang oleh id.pras.jvmlang.GenJavadocComment pada Time: 17:34:03, Date: 03/10/2024 GMT +7
 package id.pras.jvmlang.bytecode;
 
 /**
  * Kelas {@code AccessFlags} dihasilkan oleh kelas id.pras.jvmlang.bytecode.Gen
  * yang dieksekusi dari gradle task GenJavaFiles
  */
-// digenerasi pada Time: 15:42:15, Date: 03/10/2024 GMT+7
+// digenerasi pada Time: 17:34:02, Date: 03/10/2024 GMT+7
 public final class AccessFlags {
   /** {@value #SIZE} */
   public static final int SIZE = 4;
