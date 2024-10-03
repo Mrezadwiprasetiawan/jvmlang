@@ -1,11 +1,11 @@
-//digenerasi ulang oleh id.pras.jvmlang.GenJavadocComment pada Time: 03:14:09, Date: 03/10/2024 GMT +7
+//digenerasi ulang oleh id.pras.jvmlang.GenJavadocComment pada Time: 15:16:44, Date: 03/10/2024 GMT +7
 package id.pras.jvmlang.bytecode;
 
 /**
  * Kelas {@code OpCode} dihasilkan oleh kelas id.pras.jvmlang.bytecode.Gen
  * yang dieksekusi dari gradle task GenJavaFiles
  */
-// digenerasi pada Time: 03:14:09, Date: 03/10/2024 GMT+7
+// digenerasi pada Time: 15:16:44, Date: 03/10/2024 GMT+7
 public final class OpCode {
   /** {@value #SIZE} */
   public static final int SIZE = 1;
