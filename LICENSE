@@ -1,0 +1,40 @@
+---
+
+Free Use and Limited Modification License
+
+Version 1.0, October 3, 2024
+
+1. Grant of Use
+
+This software is provided "as is" and free of charge. You are granted a non-exclusive, worldwide, perpetual license to use the software without modification for any purpose, including personal, academic, or commercial use. You may freely run, distribute, and perform the software, provided that the original code remains unaltered.
+
+2. Conditions of Modification
+
+Modifications to the original source code are allowed under the following conditions:
+
+2.1 Namespace Change:
+Any modified version of this software must be contained within a different namespace, package, or identifiable naming scheme from the original. This is to ensure that the modified code does not conflict or interfere with the original software, making it clear to users that your version is distinct.
+
+2.2 Substantially Different Implementation:
+If you modify the software, your modifications must result in an implementation that is substantially different from the original. Cosmetic changes, minor tweaks, or simple refactoring do not constitute substantial modification. The intention of this clause is to encourage significant improvements, new features, or distinct functionalities.
+
+3. Redistribution of Modifications
+
+You may redistribute the modified version of the software under the following terms:
+
+3.1 Clear Attribution:
+Any redistribution of the modified software must clearly state that it is a modified version. The original author(s) and copyright holders must be credited for their work, and the redistribution must specify what changes have been made.
+
+3.2 Compliance with Original Terms:
+If you distribute a modified version, you must include this license in full and ensure that the modified software complies with all the terms of this license. Any further modifications made by downstream users must also comply with these terms.
+
+4. Disclaimer of Warranties
+
+This software is provided "as is," without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
+
+5. Termination
+
+This license will terminate immediately and automatically if you fail to comply with any of the above conditions. Upon termination, you must immediately cease all use and distribution of the software and any modified versions.
+
+
+---
