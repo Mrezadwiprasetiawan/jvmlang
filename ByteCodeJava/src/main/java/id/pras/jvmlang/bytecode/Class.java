@@ -1,5 +1,7 @@
 package id.pras.jvmlang.bytecode;
 
+import java.util.ArrayList;
+
 public final class Class {
   private Header header;
   private short constantpoolcount;

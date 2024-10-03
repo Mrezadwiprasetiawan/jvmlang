@@ -11,9 +11,10 @@ public class MethodInfo {
     this.accessflags=accessflags;
     this.name_index=name_index;
     this.descriptor_index= descriptor_index;
+    this.attributes=new Attribute[attributeCount];
   }
   
-  public MethodInfo(AccessFlags[] accessflags, short name_index, short descriptor_index, Attribute attributes){
+  public MethodInfo(AccessFlags[] accessflags, short name_index, short descriptor_index, Attribute[] attributes){
     this.accessflags=accessflags;
     this.name_index=name_index;
     this.descriptor_index= descriptor_index;
